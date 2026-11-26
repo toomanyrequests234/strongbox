@@ -8,6 +8,8 @@ Who it's for: hackathon teams splitting a prize, DAOs and guilds holding a share
 
 - Realm path: `gno.land/r/g1sjzvhjx4u4cnd92yk5g0jv68j3j302f4fwzd0z/strongbox/v1`
 - Live realm (Onyx testnet): https://onyx.testnets.gno.land/r/g1sjzvhjx4u4cnd92yk5g0jv68j3j302f4fwzd0z/strongbox/v1
+- Deploy transaction: `qOToinOFUdxs2shgM6oog9dm/AzIkC8tSwBq1ECyIww=` at height 1,429,473 on `onyx-1`
+- Package review: [passed](https://gpas.onyx.testnets.gno.land/?path=gno.land/r/g1sjzvhjx4u4cnd92yk5g0jv68j3j302f4fwzd0z/strongbox/v1)
 - Demo video: _link after recording_
 
 ## How it differs from other multisig options on gno.land
