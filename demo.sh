@@ -33,25 +33,30 @@ balance() { # prints e.g. "4 GNOT"
   awk -v u="${u:-0}" 'BEGIN { printf "%g GNOT", u / 1000000 }'
 }
 step() { echo; echo "=== $1"; read -r -p "    press Enter to run..." _; }
+refresh() { echo; echo "    >>> now show the browser: $1"; }
 
 echo "Strongbox demo. Open this page in the browser: $WEB"
 
 step "1. $KEY1 creates a 2-of-2 vault with $KEY2 as the second signer"
 OUT=$(call "$KEY1" CreateVault "Gnome Tavern team" "$ADDR2" 2 | tee /dev/stderr)
 ID=$(echo "$OUT" | sed -nE 's/^\(([0-9]+) int\)$/\1/p' | head -1)
-echo "    vault id: $ID   page: $WEB:vault/$ID"
+echo "    vault id: $ID"
+refresh "open $WEB:vault/$ID"
 
 step "2. Fund the vault with 10 GNOT"
 SEND=10000000ugnot call "$KEY1" Deposit "$ID"
+refresh "refresh the page: balance is 10 GNOT"
 
 step "3. $KEY1 proposes paying 4 GNOT to the designer (1 of 2 approvals)"
 echo "    designer balance before: $(balance $PAYEE)"
 call "$KEY1" Propose "$ID" "$PAYEE" 4000000 "Logo and banner design"
 echo "    designer balance now:    $(balance $PAYEE)   (nothing sent yet)"
+refresh "refresh the page: Approvals 1/2, one checkmark"
 
 step "4. $KEY2 approves: threshold reached, the 4 GNOT is sent in the same transaction"
 call "$KEY2" Approve "$ID" 1
 echo "    designer balance after:  $(balance $PAYEE)"
+refresh "refresh the page: the payout moved to History as paid, balance 6 GNOT"
 
 echo
 echo "Done. Show the vault page: $WEB:vault/$ID"
