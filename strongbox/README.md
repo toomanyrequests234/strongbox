@@ -110,4 +110,4 @@ Known risks, by design:
 
 ## License
 
-MIT
+MIT. See [LICENSE](LICENSE).
